@@ -2,6 +2,7 @@ class ipData {
   constructor() {
     this.getData();
   }
+
   getData() {
     $.getJSON("https://ipinfo.io", data => {
       //console.log(data)
@@ -15,6 +16,7 @@ class ipData {
       lat: Number(data.loc.split(",")[0]),
       lng: Number(data.loc.split(",")[1])
     };
+
     let map = new google.maps.Map(document.getElementById("map"), {
       center: position,
       zoom: 15,
@@ -25,8 +27,9 @@ class ipData {
       position: position,
       map: map
     });
+
     let contentString = `<div>
-                          <h6>Your estimated position</h6>
+                          <h6 class="text-center">Estimated position based on IP</h6>
                           <table class="table">
                             <tbody>
                               <tr>
@@ -59,10 +62,17 @@ class ipData {
                               </tr>
                             </tbody>
                           </table>
+                          <div class="text-right">
+                            <span class="text-right">coded by
+                              <a href="https://kostasdegaitas.de" target="_blank" rel="noopener">d3ga</a>
+                            </span>
+                          </div>
                         </div>`;
+
     let infowindow = new google.maps.InfoWindow({
       content: contentString
     });
+
     infowindow.open(map, marker);
     marker.addListener("click", function() {
       infowindow.open(map, marker);
