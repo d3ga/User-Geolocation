@@ -63,8 +63,8 @@ class ipData {
                             </tbody>
                           </table>
                           <div class="text-right">
-                            <span class="text-right">coded by
-                              <a href="https://kostasdegaitas.de" target="_blank" rel="noopener">d3ga</a>
+                            <span class="text-right">
+                              <a class="code-link" href="https://github.com/d3ga/user-geolocation-info" target="_blank" rel="noopener">&lt;/code&gt;</a>
                             </span>
                           </div>
                         </div>`;
