@@ -28,46 +28,45 @@ class ipData {
       map: map
     });
 
-    let contentString = `<div>
-                          <h6 class="text-center">Estimated position based on IP</h6>
-                          <table class="table">
-                            <tbody>
-                              <tr>
-                                <th scope="row">City</th>
-                                <td>${data.city}</td>   
-                              </tr>
-                              <tr>
-                                <th scope="row">Region</th>
-                                <td>${data.region}</td>   
-                              </tr>
-                              <tr>
-                                <th scope="row">Country</th>
-                                <td>${data.country}</td>   
-                              </tr>
-                              <tr>
-                                <th scope="row">Postal Code</th>
-                                <td>${data.postal}</td>   
-                              </tr>
-                              <tr>
-                                <th scope="row">IP</th>
-                                <td>${data.ip}</td>   
-                              </tr>
-                              <tr>
-                                <th scope="row">Provider</th>
-                                <td>${data.org}</td>   
-                              </tr>
-                              <tr>
-                                <th scope="row">Geolocation</th>
-                                <td>${data.loc}</td>   
-                              </tr>
-                            </tbody>
-                          </table>
-                          <div class="text-right">
-                            <span class="text-right">
-                              <a class="code-link" href="https://github.com/d3ga/user-geolocation-info" target="_blank" rel="noopener">&lt;/code&gt;</a>
-                            </span>
-                          </div>
-                        </div>`;
+    // data.postal = 500;
+
+    const fields = [
+      { name: "City", key: "city" },
+      { name: "Region", key: "region" },
+      { name: "Country", key: "country" },
+      { name: "Zipcode", key: "postal" },
+      { name: "IP Address", key: "ip" },
+      { name: "Provider", key: "org" },
+      { name: "Geolocation", key: "loc" }
+    ];
+
+    let contentString = `
+      <div>
+        <h6 class="text-center">Estimated position based on IP</h6>
+        <table class="table">
+          <tbody>
+          ${fields
+            .map(field => {
+              if (!data[field.key]) {
+                return "";
+              }
+
+              return `
+              <tr>
+                <th scope="row">${field.name}</th>
+                <td>${data[field.key]}</td>   
+              </tr>
+            `;
+            })
+            .join("")}
+        </tbody>
+      </table>
+      <div class="text-right">
+        <span class="text-right">
+          <a class="code-link" href="https://github.com/d3ga/user-geolocation-info" target="_blank" rel="noopener">&lt;/code&gt;</a>
+        </span>
+      </div>
+    </div>`;
 
     let infowindow = new google.maps.InfoWindow({
       content: contentString
